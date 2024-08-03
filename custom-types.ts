@@ -33,4 +33,8 @@ function displayInfo(person: Person){
     console.log(`${person.name} lives at ${person.address?.street}`)
 }
 
+let peaple: Person[] = [
+    person_1,
+]
+
 displayInfo(person_1)

@@ -4,9 +4,9 @@ type Pizza = {
 }
 
 type Order = {
-    id: number, 
+    id: number,
     pizza: Pizza,
-    order?: string,
+    status: string,
 }
 
 let menu = [
@@ -16,9 +16,9 @@ let menu = [
     { name: "Veggie", price: 9 },
 ]
 
-let cashInRegister = 100
-let nextOrderId = 1
-const orderQueue = []
+let cashInRegister: number = 100
+let nextOrderId: number = 1
+const orderQueue: Order[] = []
 
 /**
  * Challenge: Add a utility function "addNewPizza" that takes a pizza object and adds it to the menu.
@@ -37,7 +37,7 @@ function addNewPizza(pizzaObj: Pizza) {
 
 function placeOrder(pizzaName: string) {
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName)
-    if (!selectedPizza){
+    if (!selectedPizza) {
         console.error(`${pizzaName} does not exist in the menu`)
         return
 
@@ -58,6 +58,10 @@ function placeOrder(pizzaName: string) {
 
 function completeOrder(orderId: number) {
     const order = orderQueue.find(order => order.id === orderId)
+    if (!order) {
+        console.error(`${orderId} was not found in the orderQueue`)
+        return
+    }
     order.status = "completed"
     return order
 }
