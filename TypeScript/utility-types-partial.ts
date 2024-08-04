@@ -34,14 +34,14 @@ function updateUser(id: number, updates: UpdatedUser) {
     Object.assign(foundUser, updates)
 }
 
-function addNewUser(newUser: Omit<User, "id">): User {
-    const user: User = { 
+function addNewUser(newUser: Omit<User, "id" | "user">): User {
+    const user: User = {
         id: nextUserId++,
-        ...newUser 
+        ...newUser
     }
+    users.push(user)
     return user
 }
-
 
 addNewUser({ username: "joe_schmoe", role: "member" })
 
