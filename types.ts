@@ -1,4 +1,4 @@
-let myName: string = "Bob"
+let Name: string = "Bob"
 
 // Primitive Data Types: string, number, boolean
 // Challenge: Explicitly type the variables below:
