@@ -69,13 +69,39 @@ function completeOrder(orderId: number) {
     return order
 }
 
+/**
+ * Challenge: create a new utility function called getPizzaDetail. It will take
+ * a parameter called `identifier`, but there's a twist: we want this identifier
+ * to be allowed to either be the string name of the pizza (e.g. "Pepperoni"),
+ * OR to be the number ID of the pizza (e.g. 2).
+ * 
+ * Don't worry about the code inside the function yet, just create the function
+ * signature, making sure to teach TS that the `identifier` parameter is allowed
+ * to either be a string or a number.
+ */
 
-addNewPizza({ id: 5,name: "Chicken Bacon Ranch", price: 12 })
-addNewPizza({ id: 5,name: "BBQ Chicken", price: 12 })
-addNewPizza({ id: 5,name: "Spicy Sausage", price: 11 })
+export function getPizzaDetail(identifier: string | number) {
+    if (typeof identifier === "string") {
+        return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase())
+    } else if (typeof identifier === "number") {
+        return menu.find(pizza => pizza.id === identifier)
+    } else {
+        throw new TypeError("Parameter `identifier` must be either a string or a number")
+    }
+}
+
+
+
+addNewPizza({ id: 5, name: "Chicken Bacon Ranch", price: 12 })
+addNewPizza({ id: 6, name: "BBQ Chicken", price: 12 })
+addNewPizza({ id: 7, name: "Spicy Sausage", price: 11 })
 
 placeOrder("Chicken Bacon Ranch")
+placeOrder("Pepperoni")
 completeOrder(1)
+placeOrder("Anchovy")
+placeOrder("Veggie")
+completeOrder(2)
 
 console.log("Menu:", menu)
 console.log("Cash in register:", cashInRegister)
