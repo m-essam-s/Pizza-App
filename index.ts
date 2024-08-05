@@ -36,10 +36,22 @@ const orderQueue: Order[] = []
  * Challenge: Add a utility function "addNewPizza" that takes a pizza object and adds it to the menu.
  */
 
-function addNewPizza(pizzaObj: Pizza): void {
-    pizzaObj.id = nextPizzaId++
-    menu.push(pizzaObj)
+/**
+ * Challenge:
+ * Fix the addNewPizza function using the Omit utility type. This might
+ * require more than just changing the "Pizza" typed `pizzaObj` parameter.
+ * Return the new pizza object (with the id added) from the function.
+ */
+
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
+    const newPizza: Pizza = {
+        id: nextPizzaId++,
+        ...pizzaObj
+    }
+    menu.push(newPizza)
+    return newPizza
 }
+
 /**
  * Write another utility function, placeOrder, that takes a pizza name parameter and:
  * 1. finds that pizza object in the menu,
@@ -60,6 +72,17 @@ function placeOrder(pizzaName: string): Order | undefined {
     orderQueue.push(newOrder)
     return newOrder
 }
+
+
+function addToArray<T>(array:T[], item:T): T[]|undefined {
+    array.push(item)
+    return array
+}
+
+// example usage:
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 })
+addToArray<Order>(orderQueue, { id: nextOrderId++, pizza: menu[2], status: "completed" })
+
 
 /**
  * Challenge: write another utility function, completeOrder, that takes an orderId as a parameter
