@@ -73,6 +73,17 @@ function placeOrder(pizzaName: string): Order | undefined {
     return newOrder
 }
 
+
+function addToArray<T>(array:T[], item:T): T[]|undefined {
+    array.push(item)
+    return array
+}
+
+// example usage:
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 })
+addToArray<Order>(orderQueue, { id: nextOrderId++, pizza: menu[2], status: "completed" })
+
+
 /**
  * Challenge: write another utility function, completeOrder, that takes an orderId as a parameter
  * finds the correct order in the orderQueue, and marks its status as "completed". For good measure,
